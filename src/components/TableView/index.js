@@ -115,19 +115,13 @@ const TableView = props => {
               {row.cells.map(cell => (
                 <Td {...cell.getCellProps()}>
                   {cell.render('Header') === 'PostedBy' ? (
-                    <Image
-                      src={acceptRequestList[index].profilePic}
-                      alt="hello"
-                    />
-                  ) : null}
-
-                  {cell.render('Header') === 'Request_Status' ? (
-                    <ApproveButton
-                      username={acceptRequestList[index].userName}
-                      id={acceptRequestList[index].postId}
-                      requestStatus={cell.value}
-                      approve={tableApproveFunction}
-                    />
+                    <>
+                      <Image
+                        src={acceptRequestList[index].profilePic}
+                        alt="hello"
+                      />
+                      <p>{cell.render('Cell')}</p>
+                    </>
                   ) : null}
 
                   {cell.render('Header') === 'CommentsCount' ? (
@@ -141,9 +135,22 @@ const TableView = props => {
                         {cell.render('Cell')}
                       </CommentsParagraph>
                     </CommentsContainer>
-                  ) : (
+                  ) : null}
+
+                  {cell.render('Header') === 'Request_Status' ? (
+                    <ApproveButton
+                      username={acceptRequestList[index].userName}
+                      id={acceptRequestList[index].postId}
+                      requestStatus={cell.value}
+                      approve={tableApproveFunction}
+                    />
+                  ) : null}
+
+                  {cell.render('Header') !== 'CommentsCount' &&
+                  cell.render('Header') !== 'Request_Status' &&
+                  cell.render('Header') !== 'PostedBy' ? (
                     <p>{cell.render('Cell')}</p>
-                  )}
+                  ) : null}
                 </Td>
               ))}
             </tr>

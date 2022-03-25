@@ -40,6 +40,7 @@ export const Td = styled.td`
   background-color: white;
   color: #7e858e;
   font-size: 13px;
+  font-weight: 500;
 
   padding: 20px;
   text-align: center;
@@ -54,6 +55,7 @@ export const CommentsContainer = styled.div`
   position: relative;
 
   padding-top: 25px;
+  width: 50px;
 `
 
 export const CommentsParagraph = styled.p`
@@ -62,7 +64,7 @@ export const CommentsParagraph = styled.p`
   border-radius: 40px;
   position: absolute;
   top: 0px;
-  left: 79px;
+  left: 50%;
   border-style: solid;
   display: flex;
   flex-direction: row;
