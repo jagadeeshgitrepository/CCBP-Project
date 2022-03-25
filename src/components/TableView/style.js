@@ -55,6 +55,7 @@ export const CommentsContainer = styled.div`
   position: relative;
 
   padding-top: 25px;
+
   width: 50px;
 `
 
@@ -63,7 +64,7 @@ export const CommentsParagraph = styled.p`
   height: 18px;
   border-radius: 40px;
   position: absolute;
-  top: 0px;
+  top: 20%;
   left: 50%;
   border-style: solid;
   display: flex;
@@ -73,4 +74,13 @@ export const CommentsParagraph = styled.p`
   background-color: red;
   border: 0px;
   color: white;
+`
+export const DropDownContainer = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-left: 20%;
 `

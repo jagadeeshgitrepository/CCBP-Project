@@ -10,6 +10,7 @@ const ApproveButton = props => {
     <Button
       type="button"
       onClick={approveRequest}
+      id={id}
       requestStatus={requestStatus}
     >
       {requestStatus}

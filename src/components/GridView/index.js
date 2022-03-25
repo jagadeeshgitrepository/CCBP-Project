@@ -40,6 +40,8 @@ class GridView extends Component {
     acceptRequestList: [],
     pageStatus: gridViewStatus.loading,
     view: userView.grid,
+    approveLoader: false,
+    approveId: '',
   }
 
   componentDidMount() {
@@ -143,6 +145,7 @@ class GridView extends Component {
   }
 
   approveFunction = async (username, id) => {
+    this.setState({approveLoader: true, approveId: id})
     const userCardData = {
       username,
       postId: id,
@@ -167,11 +170,16 @@ class GridView extends Component {
           return {...eachItem, requestStatus: body.response}
         return {...eachItem}
       })
-      this.setState({acceptRequestList: updateApproveList})
+      this.setState({
+        acceptRequestList: updateApproveList,
+        approveLoader: false,
+        approveId: '',
+      })
     } else alert('response failed please click again')
   }
 
   renderAcceptRequestListInGrid = eachItem => {
+    const {approveLoader, approveId} = this.state
     const {
       commentsCount,
       isReacted,
@@ -205,7 +213,7 @@ class GridView extends Component {
           <ProfileCommentsContainer>
             <CommentsImage
               src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648089070/svgfile/Icon_3x_n5po8t.png"
-              alt="svg-img"
+              alt="comments-img"
             />
             {commentsCount}
           </ProfileCommentsContainer>
@@ -221,6 +229,10 @@ class GridView extends Component {
             requestStatus={requestStatus}
             approve={this.approveFunction}
           />
+
+          {approveLoader === true && approveId === postId
+            ? this.loading()
+            : null}
         </ProfileContainer>
       </CardContainer>
     )
