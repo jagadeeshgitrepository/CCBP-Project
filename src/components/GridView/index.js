@@ -11,13 +11,15 @@ import {
   ProfileImage,
   ProfileNameParagraph,
   ProfileImageContainer,
-  Button,
   ProfileContainer,
   GridViewRequestsContainer,
   ApplicationMainContainer,
   ProfileCommentsContainer,
   CommentImage,
+  Button,
 } from './style'
+
+import ApproveButton from '../ApproveButton/index'
 import Heading from '../Heading/index'
 import Paragraph from '../Paragraph/index'
 import Span from '../Span/index'
@@ -83,6 +85,7 @@ class GridView extends Component {
         reactions: item.reactions,
         tags: tagsData,
         title: item.title,
+        requestStatus: 'Approve',
         ...postedByData,
       }
     })
@@ -133,6 +136,35 @@ class GridView extends Component {
     )
   }
 
+  approveFunction = async (username, id) => {
+    const userCardData = {
+      username,
+      postId: id,
+    }
+    const url =
+      'https://y5764x56r9.execute-api.ap-south-1.amazonaws.com/mockAPI/posts'
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Bearer',
+      },
+      body: JSON.stringify(userCardData),
+    }
+    const response = await fetch(url, options)
+    const body = await response.json()
+    if (response.ok === true) {
+      const {acceptRequestList} = this.state
+      const updateApproveList = acceptRequestList.map(eachItem => {
+        if (eachItem.postId === id)
+          return {...eachItem, requestStatus: body.response}
+        return {...eachItem}
+      })
+      this.setState({acceptRequestList: updateApproveList})
+    } else alert('response failed please click again')
+  }
+
   renderAcceptRequestListInGrid = eachItem => {
     const {
       commentsCount,
@@ -145,6 +177,7 @@ class GridView extends Component {
       reactions,
       tags,
       title,
+      requestStatus,
     } = eachItem
     console.log('hello')
     console.log(tags.length)
@@ -180,7 +213,12 @@ class GridView extends Component {
             <ProfileImage src={profilePic} alt="profile-image" />
           </ProfileImageContainer>
           <ProfileNameParagraph>{userName}</ProfileNameParagraph>
-          <Button>Approve</Button>
+          <ApproveButton
+            username={userName}
+            id={postId}
+            requestStatus={requestStatus}
+            approveFunction={this.approveFunction}
+          />
         </ProfileContainer>
       </CardContainer>
     )
