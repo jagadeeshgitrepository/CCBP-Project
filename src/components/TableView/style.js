@@ -44,3 +44,31 @@ export const Td = styled.td`
   padding: 20px;
   text-align: center;
 `
+
+export const Icon = styled.i`
+  color: red;
+  font-size: 15px;
+`
+
+export const CommentsContainer = styled.div`
+  position: relative;
+
+  padding-top: 25px;
+`
+
+export const CommentsParagraph = styled.p`
+  width: 18px;
+  height: 18px;
+  border-radius: 40px;
+  position: absolute;
+  top: 0px;
+  left: 79px;
+  border-style: solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  border: 0px;
+  color: white;
+`

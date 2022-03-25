@@ -1,7 +1,17 @@
 import {useTable, useSortBy} from 'react-table'
 import React, {useMemo} from 'react'
-import {Image, TableHeadingContainer, Table, Th, Td} from './style'
+import {
+  Image,
+  TableHeadingContainer,
+  Table,
+  Th,
+  Td,
+  Icon,
+  CommentsContainer,
+  CommentsParagraph,
+} from './style'
 import ApproveButton from '../ApproveButton/index'
+import CommentsImage from '../CommentsImage/index'
 
 const TableView = props => {
   const {acceptRequestList, approveFunction} = props
@@ -118,6 +128,19 @@ const TableView = props => {
                       requestStatus={cell.value}
                       approve={tableApproveFunction}
                     />
+                  ) : null}
+
+                  {cell.render('Header') === 'CommentsCount' ? (
+                    <CommentsContainer>
+                      <CommentsImage
+                        src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648089070/svgfile/Icon_3x_n5po8t.png"
+                        alt="comments"
+                        tableComment
+                      />
+                      <CommentsParagraph>
+                        {cell.render('Cell')}
+                      </CommentsParagraph>
+                    </CommentsContainer>
                   ) : (
                     <p>{cell.render('Cell')}</p>
                   )}

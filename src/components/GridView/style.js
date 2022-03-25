@@ -47,10 +47,6 @@ export const ImageIcon = styled.img`
   align-self: ${props => (props.align ? 'flex-end' : null)};
   margin-right: 8px;
 `
-export const CommentImage = styled.img`
-  width: 40%;
-  margin-right: 8px;
-`
 
 export const ProfileContainer = styled.div`
   display: flex;

@@ -3,6 +3,7 @@ import Loader from 'react-loader-spinner'
 import {BiMessageAltDetail} from 'react-icons/bi'
 import Failure from '../Failure/index'
 import TableView from '../TableView/index'
+import CommentsImage from '../CommentsImage/index'
 import {
   LoadingContainer,
   CardContainer,
@@ -15,7 +16,6 @@ import {
   GridViewRequestsContainer,
   ApplicationMainContainer,
   ProfileCommentsContainer,
-  CommentImage,
   Button,
 } from './style'
 
@@ -188,11 +188,7 @@ class GridView extends Component {
     return (
       <CardContainer key={eachItem.postId}>
         <Heading headingContent={title} />
-        <ImageIcon
-          src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648089999/svgfile/Ellipsis_horizontal_1_-_16px_3x_n8mshg.png"
-          alt="svg-im"
-          align
-        />
+
         <Paragraph paragraphContent={postContent} />
 
         <SpanContainer>
@@ -205,7 +201,7 @@ class GridView extends Component {
             content={1}
           />
           <ProfileCommentsContainer>
-            <CommentImage
+            <CommentsImage
               src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648089070/svgfile/Icon_3x_n5po8t.png"
               alt="svg-img"
             />
