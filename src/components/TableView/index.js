@@ -1,6 +1,6 @@
-import {useTable} from 'react-table'
+import {useTable, useSortBy} from 'react-table'
 import React, {useMemo} from 'react'
-import {Image} from './style'
+import {Image, TableHeadingContainer, Table, Th, Td} from './style'
 
 const TableView = props => {
   const {acceptRequestList} = props
@@ -49,35 +49,41 @@ const TableView = props => {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({columns, data})
+  } = useTable({columns, data}, useSortBy)
 
   return (
-    <table
-      {...getTableProps()}
-      style={{
-        border: 'solid 1px #d7dfe9',
-        width: '90%',
-        'border-spacing': '0px',
-        margin: '40px',
-      }}
-    >
+    <Table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <th
-                {...column.getHeaderProps()}
-                style={{
-                  borderBottom: 'solid 1px #d7dfe9',
-                  background: 'white',
-                  color: '#171f46',
-                  fontWeight: 'bold',
-                  height: '70px',
-                  fontSize: '15px',
-                }}
-              >
-                {column.render('Header')}
-              </th>
+              <Th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <TableHeadingContainer>
+                  {column.render('Header')}
+                  {/* Add a sort direction indicator */}
+
+                  {column.render('Header') === 'PostAt' ||
+                  column.render('Header') === 'PostId' ? (
+                    <span>
+                      {column.isSortedDesc ? (
+                        <Image
+                          src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648178109/samples/people/Chevron_Down_2_-_10px_3x_f5an9b.png"
+                          alt="desc"
+                          sort
+                        />
+                      ) : (
+                        <Image
+                          src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648179375/samples/people/Chevron_up_2_-_10px_3x_eau8kg.png"
+                          alt="asc"
+                          sort
+                        />
+                      )}
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                </TableHeadingContainer>
+              </Th>
             ))}
           </tr>
         ))}
@@ -88,17 +94,7 @@ const TableView = props => {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map(cell => (
-                <td
-                  {...cell.getCellProps()}
-                  style={{
-                    borderBottom: 'solid 1px #d7dfe9',
-                    background: 'white',
-                    color: '#7e858e',
-                    fontSize: '13px',
-                    height: '70px',
-                    padding: '10px',
-                  }}
-                >
+                <Td {...cell.getCellProps()}>
                   {cell.render('Header') === 'PostedBy' ? (
                     <Image
                       src={acceptRequestList[index].profilePic}
@@ -106,14 +102,14 @@ const TableView = props => {
                     />
                   ) : null}
 
-                  {cell.render('Cell')}
-                </td>
+                  <p>{cell.render('Cell')}</p>
+                </Td>
               ))}
             </tr>
           )
         })}
       </tbody>
-    </table>
+    </Table>
   )
 }
 

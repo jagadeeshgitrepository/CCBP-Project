@@ -60,7 +60,7 @@ class GridView extends Component {
 
     const response = await fetch(apiUrl, options)
     const data = await response.json()
-
+    console.log(data)
     const changeDataTypoList = data.map(item => {
       const tagsData = item.tags.map(eachTag => ({
         tagId: eachTag.tag_id,
