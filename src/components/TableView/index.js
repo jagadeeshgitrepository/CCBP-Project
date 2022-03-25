@@ -16,7 +16,7 @@ import CommentsImage from '../CommentsImage/index'
 const TableView = props => {
   const {acceptRequestList, approveFunction} = props
   console.log('hello table this is table')
-  const data = React.useMemo(() => acceptRequestList, [])
+  const data = React.useMemo(() => acceptRequestList, [acceptRequestList])
 
   const columns = React.useMemo(
     () => [
@@ -69,7 +69,8 @@ const TableView = props => {
   const tableApproveFunction = (username, id) => {
     approveFunction(username, id)
   }
-
+  console.log('table')
+  console.log(acceptRequestList[0].requestStatus)
   return (
     <Table {...getTableProps()}>
       <thead>
@@ -138,12 +139,15 @@ const TableView = props => {
                   ) : null}
 
                   {cell.render('Header') === 'Request_Status' ? (
-                    <ApproveButton
-                      username={acceptRequestList[index].userName}
-                      id={acceptRequestList[index].postId}
-                      requestStatus={cell.value}
-                      approve={tableApproveFunction}
-                    />
+                    <>
+                      <ApproveButton
+                        username={acceptRequestList[index].userName}
+                        id={acceptRequestList[index].postId}
+                        requestStatus={cell.value}
+                        approve={tableApproveFunction}
+                      />
+                      <p>{cell.value}</p>
+                    </>
                   ) : null}
 
                   {cell.render('Header') !== 'CommentsCount' &&

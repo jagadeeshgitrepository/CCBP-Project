@@ -128,15 +128,17 @@ class GridView extends Component {
     const {acceptRequestList, view} = this.state
     console.log(acceptRequestList)
     console.log('called')
-    return view === userView.grid ? (
-      acceptRequestList.map(eachItem =>
-        this.renderAcceptRequestListInGrid(eachItem),
-      )
-    ) : (
+    console.log(view)
+
+    return view === userView.table ? (
       <TableView
         acceptRequestList={acceptRequestList}
         approveFunction={this.approveFunction}
       />
+    ) : (
+      acceptRequestList.map(eachItem =>
+        this.renderAcceptRequestListInGrid(eachItem),
+      )
     )
   }
 
