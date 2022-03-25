@@ -1,9 +1,9 @@
 import {Button} from './style'
 
 const ApproveButton = props => {
-  const {username, id, approveFunction, requestStatus} = props
+  const {username, id, approve, requestStatus} = props
 
-  const approveRequest = () => approveFunction(username, id)
+  const approveRequest = () => approve(username, id)
 
   return (
     <Button

@@ -1,9 +1,10 @@
 import {useTable, useSortBy} from 'react-table'
 import React, {useMemo} from 'react'
 import {Image, TableHeadingContainer, Table, Th, Td} from './style'
+import ApproveButton from '../ApproveButton/index'
 
 const TableView = props => {
-  const {acceptRequestList} = props
+  const {acceptRequestList, approveFunction} = props
   console.log('hello table this is table')
   const data = React.useMemo(() => acceptRequestList, [])
 
@@ -24,6 +25,10 @@ const TableView = props => {
       {
         Header: 'PostedBy',
         accessor: 'userName',
+      },
+      {
+        Header: 'Request_Status',
+        accessor: 'requestStatus',
       },
 
       {
@@ -50,6 +55,10 @@ const TableView = props => {
     rows,
     prepareRow,
   } = useTable({columns, data}, useSortBy)
+
+  const tableApproveFunction = (username, id) => {
+    approveFunction(username, id)
+  }
 
   return (
     <Table {...getTableProps()}>
@@ -102,7 +111,16 @@ const TableView = props => {
                     />
                   ) : null}
 
-                  <p>{cell.render('Cell')}</p>
+                  {cell.render('Header') === 'Request_Status' ? (
+                    <ApproveButton
+                      username={acceptRequestList[index].userName}
+                      id={acceptRequestList[index].postId}
+                      requestStatus={cell.value}
+                      approve={tableApproveFunction}
+                    />
+                  ) : (
+                    <p>{cell.render('Cell')}</p>
+                  )}
                 </Td>
               ))}
             </tr>

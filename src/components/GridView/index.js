@@ -127,12 +127,16 @@ class GridView extends Component {
   success = () => {
     const {acceptRequestList, view} = this.state
     console.log(acceptRequestList)
+    console.log('called')
     return view === userView.grid ? (
       acceptRequestList.map(eachItem =>
         this.renderAcceptRequestListInGrid(eachItem),
       )
     ) : (
-      <TableView acceptRequestList={acceptRequestList} />
+      <TableView
+        acceptRequestList={acceptRequestList}
+        approveFunction={this.approveFunction}
+      />
     )
   }
 
@@ -217,7 +221,7 @@ class GridView extends Component {
             username={userName}
             id={postId}
             requestStatus={requestStatus}
-            approveFunction={this.approveFunction}
+            approve={this.approveFunction}
           />
         </ProfileContainer>
       </CardContainer>
