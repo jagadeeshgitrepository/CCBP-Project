@@ -118,7 +118,7 @@ const TableView = props => {
                   {cell.render('Header') === 'PostedBy' ? (
                     <>
                       <Image
-                        src={acceptRequestList[index].profilePic}
+                        src={cell.render('Cell').props.row.original.profilePic}
                         alt="hello"
                       />
                       <p>{cell.render('Cell')}</p>
@@ -141,12 +141,13 @@ const TableView = props => {
                   {cell.render('Header') === 'Request_Status' ? (
                     <>
                       <ApproveButton
-                        username={acceptRequestList[index].userName}
-                        id={acceptRequestList[index].postId}
+                        username={
+                          cell.render('Cell').props.row.original.userName
+                        }
+                        id={cell.render('Cell').props.row.original.postId}
                         requestStatus={cell.value}
                         approve={tableApproveFunction}
                       />
-                      <p>{cell.value}</p>
                     </>
                   ) : null}
 
