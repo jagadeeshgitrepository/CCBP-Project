@@ -96,3 +96,18 @@ export const RoleContainer = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
 `
+export const SearchButton = styled.button`
+  background-color: #0b69ff;
+  width: 80px;
+  height: 35px;
+  border: 0px;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  border-radius: 5px;
+`

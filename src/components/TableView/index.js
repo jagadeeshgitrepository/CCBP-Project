@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid'
 import Loader from 'react-loader-spinner'
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
-import React, {useMemo, useState} from 'react'
+import React, {useMemo, useState, useEffect} from 'react'
 import Select from 'react-select'
 import SelectTag from '../ReactDropDown/index'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -20,16 +20,22 @@ import {
   CommentsParagraph,
   DropDownContainer,
   RoleContainer,
+  SearchButton,
 } from './style'
 import ApproveButton from '../ApproveButton/index'
 import CommentsImage from '../CommentsImage/index'
 
 const TableView = props => {
   const {acceptRequestList, approveFunction, approveLoader, approveId} = props
-  const [requestsData, setRequestData] = useState(acceptRequestList)
-  console.log('hello table this is table')
-  console.log(acceptRequestList)
-  const requestData = acceptRequestList
+  const [requestData, setRequestData] = useState(acceptRequestList)
+
+  const [multipleSelect, setMultipleSelect] = useState('')
+  const [singleSelect, setSingleSelect] = useState('Approve')
+
+  useEffect(() => {
+    setRequestData(acceptRequestList)
+  }, [acceptRequestList])
+
   const data = React.useMemo(() => requestData, [requestData])
 
   const columns = React.useMemo(
@@ -101,25 +107,30 @@ const TableView = props => {
     {id: 2, value: 'Approve', label: 'Approve'},
   ]
 
-  console.log(tagsList.flat())
-
   const valuesFun = selectedData => {
+    setMultipleSelect(selectedData)
+  }
+
+  const singleDropDownFunction = event => setSingleSelect(event.value)
+
+  const searchSelectedOptions = () => {
     const refineSelectedData = acceptRequestList.filter(originalData => {
       const {tags} = originalData
+      const {requestStatus} = originalData
       if (tags.length !== 0) {
         if (
-          selectedData.includes(tags[0].tagName) ||
-          selectedData.includes(tags[1].tagName)
+          (multipleSelect.includes(tags[0].tagName) ||
+            multipleSelect.includes(tags[1].tagName)) &&
+          requestStatus === singleSelect
         )
           return true
       }
 
       return false
     })
-    console.log(refineSelectedData)
-  }
 
-  const valuesFu = event => console.log(event.value)
+    setRequestData(refineSelectedData)
+  }
 
   return (
     <>
@@ -127,11 +138,12 @@ const TableView = props => {
         <div className="container">
           <div className="row">
             <div className="col-9">
-              <Select options={catageory} onChange={valuesFu} />
+              <Select options={catageory} onChange={singleDropDownFunction} />
             </div>
           </div>
         </div>
         <SelectTag tagsList={tagsList.flat()} valueFun={valuesFun} />
+        <SearchButton onClick={searchSelectedOptions}>Search</SearchButton>
       </DropDownContainer>
       <Table {...getTableProps()}>
         <thead>

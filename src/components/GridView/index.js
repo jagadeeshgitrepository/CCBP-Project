@@ -64,7 +64,7 @@ class GridView extends Component {
 
     const response = await fetch(apiUrl, options)
     const data = await response.json()
-    console.log(data)
+
     const changeDataTypoList = data.map(item => {
       const {tags} = item
       let tagsData
@@ -137,10 +137,13 @@ class GridView extends Component {
   )
 
   success = () => {
-    const {acceptRequestList, view, approveLoader, approveId} = this.state
-    console.log(acceptRequestList)
-    console.log('called')
-    console.log(view)
+    const {
+      acceptRequestList,
+      view,
+      approveLoader,
+      approveId,
+      shouldUpdateTableData,
+    } = this.state
 
     return view === userView.table ? (
       <TableView
@@ -186,6 +189,7 @@ class GridView extends Component {
         acceptRequestList: updateApproveList,
         approveLoader: false,
         approveId: '',
+        shouldUpdateTableData: true,
       })
     } else alert('response failed please click again')
   }
@@ -205,8 +209,7 @@ class GridView extends Component {
       title,
       requestStatus,
     } = eachItem
-    console.log('hello')
-    console.log(tags.length)
+
     return (
       <CardContainer key={eachItem.postId}>
         <Heading headingContent={title} />
@@ -251,13 +254,15 @@ class GridView extends Component {
   }
 
   changeView = () => {
-    console.log('change view')
     this.setState(prevState => ({
       view: prevState.view === 'GRID' ? userView.table : userView.grid,
     }))
   }
 
   render() {
+    const {shouldUpdateTableData} = this.state
+    console.log('abbo')
+    console.log(shouldUpdateTableData)
     return (
       <ApplicationMainContainer>
         <h1>Accept Requests</h1>
