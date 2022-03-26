@@ -84,3 +84,15 @@ export const DropDownContainer = styled.div`
 
   margin-left: 20%;
 `
+
+export const RoleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 85px;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+`

@@ -7,6 +7,7 @@ import React, {useMemo, useState} from 'react'
 import Select from 'react-select'
 import SelectTag from '../ReactDropDown/index'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Span from '../Span/index'
 
 import {
   Image,
@@ -18,16 +19,18 @@ import {
   CommentsContainer,
   CommentsParagraph,
   DropDownContainer,
+  RoleContainer,
 } from './style'
 import ApproveButton from '../ApproveButton/index'
 import CommentsImage from '../CommentsImage/index'
 
 const TableView = props => {
-  const {acceptRequestList, approveFunction} = props
-  const [newList, setterFun] = useState(acceptRequestList)
+  const {acceptRequestList, approveFunction, approveLoader, approveId} = props
+  const [requestsData, setRequestData] = useState(acceptRequestList)
   console.log('hello table this is table')
   console.log(acceptRequestList)
-  const data = React.useMemo(() => acceptRequestList, [acceptRequestList])
+  const requestData = acceptRequestList
+  const data = React.useMemo(() => requestData, [requestData])
 
   const columns = React.useMemo(
     () => [
@@ -50,6 +53,10 @@ const TableView = props => {
       {
         Header: 'Request_Status',
         accessor: 'requestStatus',
+      },
+      {
+        Header: 'Tags',
+        accessor: 'isReacted',
       },
 
       {
@@ -95,17 +102,36 @@ const TableView = props => {
   ]
 
   console.log(tagsList.flat())
+
+  const valuesFun = selectedData => {
+    const refineSelectedData = acceptRequestList.filter(originalData => {
+      const {tags} = originalData
+      if (tags.length !== 0) {
+        if (
+          selectedData.includes(tags[0].tagName) ||
+          selectedData.includes(tags[1].tagName)
+        )
+          return true
+      }
+
+      return false
+    })
+    console.log(refineSelectedData)
+  }
+
+  const valuesFu = event => console.log(event.value)
+
   return (
     <>
       <DropDownContainer className="col-12">
         <div className="container">
           <div className="row">
             <div className="col-9">
-              <Select options={catageory} />
+              <Select options={catageory} onChange={valuesFu} />
             </div>
           </div>
         </div>
-        <SelectTag tagsList={tagsList.flat()} />
+        <SelectTag tagsList={tagsList.flat()} valueFun={valuesFun} />
       </DropDownContainer>
       <Table {...getTableProps()}>
         <thead>
@@ -179,6 +205,25 @@ const TableView = props => {
                       <p>{cell.value.slice(0, 10)}</p>
                     ) : null}
 
+                    {cell.render('Header') === 'Tags' ? (
+                      <RoleContainer>
+                        <Span
+                          spanContent={
+                            cell.render('Cell').props.row.original.tags[0]
+                              .tagName
+                          }
+                          content={0}
+                        />
+                        <Span
+                          spanContent={
+                            cell.render('Cell').props.row.original.tags[1]
+                              .tagName
+                          }
+                          content={1}
+                        />
+                      </RoleContainer>
+                    ) : null}
+
                     {cell.render('Header') === 'Request_Status' ? (
                       <>
                         <ApproveButton
@@ -190,7 +235,9 @@ const TableView = props => {
                           approve={tableApproveFunction}
                         />
 
-                        {cell.value !== 'Success' ? (
+                        {approveLoader === true &&
+                        approveId ===
+                          cell.render('Cell').props.row.original.postId ? (
                           <div testid="loader">
                             <Loader
                               type="TailSpin"
@@ -206,6 +253,7 @@ const TableView = props => {
                     {cell.render('Header') !== 'CommentsCount' &&
                     cell.render('Header') !== 'Request_Status' &&
                     cell.render('Header') !== 'PostAt' &&
+                    cell.render('Header') !== 'Tags' &&
                     cell.render('Header') !== 'PostedBy' ? (
                       <p>{cell.render('Cell')}</p>
                     ) : null}

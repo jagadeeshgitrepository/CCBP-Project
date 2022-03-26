@@ -1,8 +1,10 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
+import {v4 as uuidv4} from 'uuid'
 import {BiMessageAltDetail} from 'react-icons/bi'
 import Failure from '../Failure/index'
 import TableView from '../TableView/index'
+
 import CommentsImage from '../CommentsImage/index'
 import {
   LoadingContainer,
@@ -64,10 +66,18 @@ class GridView extends Component {
     const data = await response.json()
     console.log(data)
     const changeDataTypoList = data.map(item => {
-      const tagsData = item.tags.map(eachTag => ({
-        tagId: eachTag.tag_id,
-        tagName: eachTag.tag_name,
-      }))
+      const {tags} = item
+      let tagsData
+      if (tags[0] !== undefined)
+        tagsData = tags.map(eachTag => ({
+          tagId: eachTag.tag_id,
+          tagName: eachTag.tag_name,
+        }))
+      else
+        tagsData = [
+          {tagId: uuidv4(), tagName: 'Empty'},
+          {tagId: uuidv4(), tagName: 'Empty'},
+        ]
 
       const postedByData = {
         userId: item.posted_by.user_id,
@@ -127,7 +137,7 @@ class GridView extends Component {
   )
 
   success = () => {
-    const {acceptRequestList, view} = this.state
+    const {acceptRequestList, view, approveLoader, approveId} = this.state
     console.log(acceptRequestList)
     console.log('called')
     console.log(view)
@@ -136,6 +146,8 @@ class GridView extends Component {
       <TableView
         acceptRequestList={acceptRequestList}
         approveFunction={this.approveFunction}
+        approveLoader={approveLoader}
+        approveId={approveId}
       />
     ) : (
       acceptRequestList.map(eachItem =>

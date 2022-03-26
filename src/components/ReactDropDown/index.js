@@ -4,7 +4,13 @@ import chroma from 'chroma-js'
 import Select, {StylesConfig} from 'react-select'
 
 const SelectTag = props => {
-  const {tagsList} = props
+  const {tagsList, valueFun} = props
+
+  const fun = event => {
+    console.log('clicked')
+    const selectedData = event.map(eachSelected => eachSelected.value)
+    valueFun(selectedData)
+  }
 
   return (
     <div className="container">
@@ -15,6 +21,7 @@ const SelectTag = props => {
             defaultValue={[tagsList[0], tagsList[1]]}
             isMulti
             options={tagsList}
+            onChange={fun}
           />
         </div>
       </div>
