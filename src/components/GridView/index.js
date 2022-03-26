@@ -15,10 +15,10 @@ import {
   ProfileNameParagraph,
   ProfileImageContainer,
   ProfileContainer,
-  GridViewRequestsContainer,
+  ViewRequestsContainer,
   ApplicationMainContainer,
   ProfileCommentsContainer,
-  Button,
+  ChangeViewButton,
 } from './style'
 
 import ApproveButton from '../ApproveButton/index'
@@ -265,14 +265,12 @@ class GridView extends Component {
     console.log(shouldUpdateTableData)
     return (
       <ApplicationMainContainer>
-        <h1>Accept Requests</h1>
-        <Button type="button" onClick={this.changeView}>
+        <ChangeViewButton type="button" onClick={this.changeView}>
           Change
-        </Button>
-
-        <GridViewRequestsContainer>
+        </ChangeViewButton>
+        <ViewRequestsContainer>
           {this.switchPageContent()}
-        </GridViewRequestsContainer>
+        </ViewRequestsContainer>
       </ApplicationMainContainer>
     )
   }

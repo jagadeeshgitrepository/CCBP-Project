@@ -16,8 +16,8 @@ export const TableHeadingContainer = styled.div`
   text-align: center;
 `
 export const Table = styled.table`
-  border: solid 2px #d7dfe9;
-  width: 90%;
+  border: solid 1px #d7dfe9;
+  width: 60%;
   background-color: white;
   border-spacing: 0px;
   margin: 40px;
@@ -26,23 +26,23 @@ export const Table = styled.table`
 `
 
 export const Th = styled.th`
-  border-bottom: solid 2px #d7dfe9;
+  border-bottom: solid 1px #d7dfe9;
   background-color: 'white';
   color: #171f46;
   font-weight: bold;
+  font-family: 'Roboto';
   height: 70px;
   font-size: 15px;
   width: 10px;
 `
 
 export const Td = styled.td`
-  border-bottom: solid 2px #d7dfe9;
-  background-color: white;
+  border-bottom: solid 1px #d7dfe9;
+
   color: #7e858e;
   font-size: 13px;
   font-weight: 500;
 
-  padding: 20px;
   text-align: center;
 `
 
@@ -54,9 +54,9 @@ export const Icon = styled.i`
 export const CommentsContainer = styled.div`
   position: relative;
 
-  padding-top: 25px;
-
-  width: 50px;
+  padding-top: 10px;
+  width: 70px;
+  height: 50px;
 `
 
 export const CommentsParagraph = styled.p`
@@ -64,9 +64,9 @@ export const CommentsParagraph = styled.p`
   height: 18px;
   border-radius: 40px;
   position: absolute;
-  top: 20%;
+  top: 0;
   left: 50%;
-  border-style: solid;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -90,11 +90,8 @@ export const RoleContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: 100px;
   height: 85px;
-
-  margin-top: 20px;
-  margin-bottom: 20px;
 `
 export const SearchButton = styled.button`
   background-color: #0b69ff;
@@ -111,3 +108,19 @@ export const SearchButton = styled.button`
   letter-spacing: normal;
   border-radius: 5px;
 `
+
+export const TableParagraph = styled.p`
+  height: 100px;
+  width: 100%;
+  overflow-y: auto;
+
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-overflow: ellipsis;
+`
+
+export const TableRow = styled.tr``

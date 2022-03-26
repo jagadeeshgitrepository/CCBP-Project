@@ -4,12 +4,12 @@ export const ApplicationMainContainer = styled.div`
   background-color: #fbfbfb;
   width: 100%;
 `
-export const GridViewRequestsContainer = styled.div`
+export const ViewRequestsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 `
 export const LoadingContainer = styled.div`
@@ -83,7 +83,7 @@ export const ProfileNameParagraph = styled.p`
   font-weight: 500;
 `
 
-export const Button = styled.button`
+export const ChangeViewButton = styled.button`
   background-color: #0b69ff;
   width: 80px;
   height: 35px;

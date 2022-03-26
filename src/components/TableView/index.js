@@ -5,10 +5,11 @@ import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import React, {useMemo, useState, useEffect} from 'react'
 import Select from 'react-select'
-import SelectTag from '../ReactDropDown/index'
+import SelectTagMultiple from '../MultipleDropDown/index'
+import SelectTagSingle from '../SingleDropDown/index'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Span from '../Span/index'
-
+import './index.css'
 import {
   Image,
   TableHeadingContainer,
@@ -21,6 +22,8 @@ import {
   DropDownContainer,
   RoleContainer,
   SearchButton,
+  TableParagraph,
+  TableRow,
 } from './style'
 import ApproveButton from '../ApproveButton/index'
 import CommentsImage from '../CommentsImage/index'
@@ -66,12 +69,12 @@ const TableView = props => {
       },
 
       {
-        Header: 'PostAt',
+        Header: 'Date',
         accessor: 'postedAt',
       },
 
       {
-        Header: 'CommentsCount',
+        Header: 'Comments',
         accessor: 'commentsCount',
       },
     ],
@@ -107,11 +110,11 @@ const TableView = props => {
     {id: 2, value: 'Approve', label: 'Approve'},
   ]
 
-  const valuesFun = selectedData => {
+  const multipleDropDownFunction = selectedData => {
     setMultipleSelect(selectedData)
   }
 
-  const singleDropDownFunction = event => setSingleSelect(event.value)
+  const singleDropDownFunction = value => setSingleSelect(value)
 
   const searchSelectedOptions = () => {
     const refineSelectedData = acceptRequestList.filter(originalData => {
@@ -135,14 +138,15 @@ const TableView = props => {
   return (
     <>
       <DropDownContainer className="col-12">
-        <div className="container">
-          <div className="row">
-            <div className="col-9">
-              <Select options={catageory} onChange={singleDropDownFunction} />
-            </div>
-          </div>
-        </div>
-        <SelectTag tagsList={tagsList.flat()} valueFun={valuesFun} />
+        <SelectTagSingle
+          options={catageory}
+          dropDownFunction={singleDropDownFunction}
+        />
+
+        <SelectTagMultiple
+          tagsList={tagsList.flat()}
+          dropDownFunction={multipleDropDownFunction}
+        />
         <SearchButton onClick={searchSelectedOptions}>Search</SearchButton>
       </DropDownContainer>
       <Table {...getTableProps()}>
@@ -155,7 +159,7 @@ const TableView = props => {
                     {column.render('Header')}
                     {/* Add a sort direction indicator */}
 
-                    {column.render('Header') === 'PostAt' ||
+                    {column.render('Header') === 'Date' ||
                     column.render('Header') === 'PostId' ? (
                       <span>
                         {column.isSortedDesc ? (
@@ -185,93 +189,95 @@ const TableView = props => {
           {rows.map((row, index) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <TableRow {...row.getRowProps()}>
                 {row.cells.map(cell => (
                   <Td {...cell.getCellProps()}>
-                    {cell.render('Header') === 'PostedBy' ? (
-                      <>
-                        <Image
-                          src={
-                            cell.render('Cell').props.row.original.profilePic
-                          }
-                          alt="hello"
-                        />
+                    <TableParagraph>
+                      {cell.render('Header') === 'PostedBy' ? (
+                        <>
+                          <Image
+                            src={
+                              cell.render('Cell').props.row.original.profilePic
+                            }
+                            alt="hello"
+                          />
+                          <p>{cell.render('Cell')}</p>
+                        </>
+                      ) : null}
+
+                      {cell.render('Header') === 'Comments' ? (
+                        <CommentsContainer>
+                          <CommentsImage
+                            src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648295260/output-onlinepngtools_1_zufztr.png"
+                            alt="comments"
+                            tableComment
+                          />
+                          <CommentsParagraph>
+                            {cell.render('Cell')}
+                          </CommentsParagraph>
+                        </CommentsContainer>
+                      ) : null}
+
+                      {cell.render('Header') === 'Date' ? (
+                        <p>{cell.value.slice(0, 10)}</p>
+                      ) : null}
+
+                      {cell.render('Header') === 'Tags' ? (
+                        <RoleContainer>
+                          <Span
+                            spanContent={
+                              cell.render('Cell').props.row.original.tags[0]
+                                .tagName
+                            }
+                            content={0}
+                          />
+                          <Span
+                            spanContent={
+                              cell.render('Cell').props.row.original.tags[1]
+                                .tagName
+                            }
+                            content={1}
+                          />
+                        </RoleContainer>
+                      ) : null}
+
+                      {cell.render('Header') === 'Request_Status' ? (
+                        <>
+                          <ApproveButton
+                            username={
+                              cell.render('Cell').props.row.original.userName
+                            }
+                            id={cell.render('Cell').props.row.original.postId}
+                            requestStatus={cell.value}
+                            approve={tableApproveFunction}
+                          />
+
+                          {approveLoader === true &&
+                          approveId ===
+                            cell.render('Cell').props.row.original.postId ? (
+                            <div testid="loader">
+                              <Loader
+                                type="TailSpin"
+                                color="#00bfff"
+                                height={50}
+                                width={50}
+                              />
+                            </div>
+                          ) : null}
+                        </>
+                      ) : null}
+
+                      {cell.render('Header') !== 'Comments' &&
+                      cell.render('Header') !== 'Request_Status' &&
+                      cell.render('Header') !== 'Date' &&
+                      cell.render('Header') !== 'Tags' &&
+                      cell.render('Header') !== 'PostedBy' ? (
                         <p>{cell.render('Cell')}</p>
-                      </>
-                    ) : null}
-
-                    {cell.render('Header') === 'CommentsCount' ? (
-                      <CommentsContainer>
-                        <CommentsImage
-                          src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648089070/svgfile/Icon_3x_n5po8t.png"
-                          alt="comments"
-                          tableComment
-                        />
-                        <CommentsParagraph>
-                          {cell.render('Cell')}
-                        </CommentsParagraph>
-                      </CommentsContainer>
-                    ) : null}
-
-                    {cell.render('Header') === 'PostAt' ? (
-                      <p>{cell.value.slice(0, 10)}</p>
-                    ) : null}
-
-                    {cell.render('Header') === 'Tags' ? (
-                      <RoleContainer>
-                        <Span
-                          spanContent={
-                            cell.render('Cell').props.row.original.tags[0]
-                              .tagName
-                          }
-                          content={0}
-                        />
-                        <Span
-                          spanContent={
-                            cell.render('Cell').props.row.original.tags[1]
-                              .tagName
-                          }
-                          content={1}
-                        />
-                      </RoleContainer>
-                    ) : null}
-
-                    {cell.render('Header') === 'Request_Status' ? (
-                      <>
-                        <ApproveButton
-                          username={
-                            cell.render('Cell').props.row.original.userName
-                          }
-                          id={cell.render('Cell').props.row.original.postId}
-                          requestStatus={cell.value}
-                          approve={tableApproveFunction}
-                        />
-
-                        {approveLoader === true &&
-                        approveId ===
-                          cell.render('Cell').props.row.original.postId ? (
-                          <div testid="loader">
-                            <Loader
-                              type="TailSpin"
-                              color="#00bfff"
-                              height={50}
-                              width={50}
-                            />
-                          </div>
-                        ) : null}
-                      </>
-                    ) : null}
-
-                    {cell.render('Header') !== 'CommentsCount' &&
-                    cell.render('Header') !== 'Request_Status' &&
-                    cell.render('Header') !== 'PostAt' &&
-                    cell.render('Header') !== 'Tags' &&
-                    cell.render('Header') !== 'PostedBy' ? (
-                      <p>{cell.render('Cell')}</p>
-                    ) : null}
+                      ) : null}
+                    </TableParagraph>
                   </Td>
                 ))}
-              </tr>
+              </TableRow>
             )
           })}
         </tbody>
