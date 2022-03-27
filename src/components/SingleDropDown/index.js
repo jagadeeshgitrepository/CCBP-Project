@@ -13,11 +13,11 @@ const SelectTagSingle = props => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-9">
+        <div className="col-12">
           <Select
             options={options}
             onChange={singleDropFun}
-            placeholder="Tags..."
+            placeholder="Status..."
           />
         </div>
       </div>

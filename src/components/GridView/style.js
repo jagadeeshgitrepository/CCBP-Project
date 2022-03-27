@@ -91,6 +91,7 @@ export const ChangeViewButton = styled.button`
   color: white;
   font-family: 'Roboto';
   font-size: 14px;
+  align-self: flex-start;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;

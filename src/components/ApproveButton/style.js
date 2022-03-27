@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Button = styled.button`
   background-color: ${props =>
     props.requestStatus === 'Approve' ? '#0b69ff' : 'green'};
-  width: 80px;
+  width: 90px;
   height: 35px;
   border: 0px;
   color: white;

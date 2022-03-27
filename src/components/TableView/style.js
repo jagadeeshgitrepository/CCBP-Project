@@ -60,11 +60,12 @@ export const CommentsContainer = styled.div`
 `
 
 export const CommentsParagraph = styled.p`
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   border-radius: 40px;
   position: absolute;
   top: 0;
+
   left: 50%;
 
   display: flex;
@@ -76,13 +77,16 @@ export const CommentsParagraph = styled.p`
   color: white;
 `
 export const DropDownContainer = styled.div`
-  width: 50%;
+  width: ${props => (props.drop ? '60%' : null)};
+
+  width: ${props => (props.selectContainer ? '80%' : null)};
+
+  width: ${props => (props.IconContainer ? '8%' : null)};
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  margin-left: 20%;
 `
 
 export const RoleContainer = styled.div`
@@ -124,3 +128,18 @@ export const TableParagraph = styled.p`
 `
 
 export const TableRow = styled.tr``
+
+export const FilterParagraph = styled.p`
+  margin-top: 20px;
+  margin-right: 15px;
+  font-size: 70%;
+  margin-right: 15px;
+`
+
+export const TableViewContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`

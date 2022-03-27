@@ -8,8 +8,11 @@ const SelectTagMultiple = props => {
 
   const multiDropFun = event => {
     console.log('clicked')
-    const selectedData = event.map(eachSelected => eachSelected.value)
-    dropDownFunction(selectedData)
+    let selectedData = event.map(eachSelected => eachSelected.value)
+    if (selectedData[0] === '')
+      selectedData = tagsList.map(eachTag => eachTag.value)
+    const noDuplicates = [...new Set(selectedData)]
+    dropDownFunction(noDuplicates)
   }
 
   return (
@@ -18,10 +21,10 @@ const SelectTagMultiple = props => {
         <div className="col-12">
           <Select
             closeMenuOnSelect={false}
-            defaultValue={[tagsList[0], tagsList[1]]}
             isMulti
             options={tagsList}
             onChange={multiDropFun}
+            placeholder="Tags..."
           />
         </div>
       </div>

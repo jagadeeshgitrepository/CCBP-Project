@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import {v4 as uuidv4} from 'uuid'
 import {BiMessageAltDetail} from 'react-icons/bi'
+
 import Failure from '../Failure/index'
 import TableView from '../TableView/index'
 
