@@ -64,7 +64,7 @@ export const CommentsContainer = styled.div`
   position: relative;
 
   padding-top: 10px;
-  width: 70px;
+  width: 30px;
   height: 50px;
 `
 
@@ -73,8 +73,9 @@ export const CommentsParagraph = styled.p`
   height: 15px;
   border-radius: 40px;
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 50%;
+
   font-family: 'HK Grotesk';
   font-size: 10px;
   font-weight: 600;
@@ -95,7 +96,7 @@ export const DropDownContainer = styled.div`
 
   width: ${props => (props.selectContainer ? '80%' : null)};
 
-  width: ${props => (props.IconContainer ? '8%' : null)};
+  width: ${props => (props.IconContainer ? '80px' : null)};
 
   display: flex;
   flex-direction: row;
@@ -148,9 +149,6 @@ export const TableRow = styled.tr``
 
 export const FilterParagraph = styled.p`
   margin-top: 20px;
-  margin-right: 15px;
-  font-size: 70%;
-  margin-right: 15px;
 `
 
 export const TableViewContainer = styled.div`
