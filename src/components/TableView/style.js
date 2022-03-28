@@ -140,6 +140,8 @@ export const TableParagraph = styled.p`
   justify-content: center;
   align-items: center;
   text-overflow: ellipsis;
+  text-align: left;
+  line-height: 1.33;
 `
 
 export const TableRow = styled.tr``

@@ -1,7 +1,7 @@
-import GridView from './components/GridView'
+import DataViews from './components/DataViews/index'
 
 import './App.css'
 
-const App = () => <GridView />
+const App = () => <DataViews />
 
 export default App

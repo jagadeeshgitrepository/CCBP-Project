@@ -12,9 +12,6 @@ export const ViewRequestsContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
 `
-export const LoadingContainer = styled.div`
-  border: 0px;
-`
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: ${props => (props.align ? 'row' : 'column')};
@@ -32,7 +29,7 @@ export const CardContainer = styled.div`
   background-color: #ffffff;
 `
 
-export const TagsContainer = styled.div`
+export const SpanContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -5,12 +5,12 @@ import {v4 as uuidv4} from 'uuid'
 import Loader from 'react-loader-spinner'
 import {BiFilter} from 'react-icons/bi'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
-import React, {useMemo, useState, useEffect} from 'react'
-import Select from 'react-select'
+import React, {useState, useEffect} from 'react'
+
 import SelectTagMultiple from '../MultipleDropDown/index'
 import SelectTagSingle from '../SingleDropDown/index'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Span from '../Span/index'
+import Tags from '../Tags/index'
 
 import './index.css'
 import {
@@ -19,7 +19,6 @@ import {
   Table,
   Th,
   Td,
-  Icon,
   CommentsContainer,
   CommentsParagraph,
   FilterParagraph,
@@ -226,7 +225,7 @@ const TableView = props => {
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {rows.map((row, index) => {
+            {rows.map(row => {
               prepareRow(row)
               return (
                 <TableRow {...row.getRowProps()}>
@@ -265,15 +264,15 @@ const TableView = props => {
 
                         {cell.render('Header') === 'TAGS' ? (
                           <RoleContainer>
-                            <Span
-                              spanContent={
+                            <Tags
+                              tagContent={
                                 cell.render('Cell').props.row.original.tags[0]
                                   .tagName
                               }
                               content={0}
                             />
-                            <Span
-                              spanContent={
+                            <Tags
+                              tagContent={
                                 cell.render('Cell').props.row.original.tags[1]
                                   .tagName
                               }

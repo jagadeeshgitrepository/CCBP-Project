@@ -1,7 +1,4 @@
-import React from 'react'
-import chroma from 'chroma-js'
-
-import Select, {StylesConfig} from 'react-select'
+import Select from 'react-select'
 
 const SelectTagMultiple = props => {
   const {tagsList, dropDownFunction} = props
