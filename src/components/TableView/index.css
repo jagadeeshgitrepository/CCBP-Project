@@ -24,10 +24,10 @@
   list-style: none;
   outline: none;
   text-decoration: none;
+  color: #7e858e;
 }
 li {
-  color: #171f46;
-  border-color: #171f46;
+  border-color: #d7dfe9;
 }
 .pagination > .active > a {
   background-color: #171f46;
@@ -35,12 +35,20 @@ li {
   color: #171f46;
 }
 .pagination > li > a {
-  border: 1px solid #171f46;
+  border: 2px solid #171f46;
   border-radius: 5px;
   padding: 2px 6px;
   outline: none;
-  color: #171f46;
+  color: #d7dfe9;
   cursor: pointer;
+  font-family: 'HK Grotesk';
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.12px;
+  border-color: #d7dfe9;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -61,7 +69,9 @@ li {
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span,
-.pagination > li:last-child > a,
-.pagination > li:last-child > span {
-  border-radius: unset;
+.pagination > li:last-child > a {
+  border-radius: 5px;
+}
+a {
+  text-decoration: none;
 }

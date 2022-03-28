@@ -7,13 +7,14 @@ export const Button = styled.button`
   height: 35px;
   border: 0px;
   color: white;
-  font-family: 'Roboto';
+  font-family: 'Hk Grotesk';
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.71;
   letter-spacing: normal;
+  color: white;
   border-radius: 5px;
 `
 

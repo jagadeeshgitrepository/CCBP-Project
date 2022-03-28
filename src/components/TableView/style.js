@@ -1,19 +1,28 @@
 import styled from 'styled-components'
+import 'typeface-hk-grotesk'
 
 export const Image = styled.img`
   border-radius: 40px;
-  width: ${props => (props.sort ? '15px' : '40px')};
-  height: ${props => (props.sort ? '15px' : '40px')};
-  margin-top: ${props => (props.sort ? '7px' : '')};
+  width: ${props => (props.sort ? '10px' : '40px')};
+  height: ${props => (props.sort ? '10px' : '40px')};
+  margin-top: ${props => (props.sort ? '2px' : '')};
   margin-left: ${props => (props.sort ? '5px' : '')};
 `
 
-export const TableHeadingContainer = styled.div`
+export const TableHeadingContainer = styled.h1`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-family: 'HK Grotesk';
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.12px;
+  color: var(--dark-blue-grey);
 `
 export const Table = styled.table`
   border: solid 1px #d7dfe9;
@@ -30,10 +39,10 @@ export const Th = styled.th`
   background-color: 'white';
   color: #171f46;
   font-weight: bold;
-  font-family: 'Roboto';
+  font-family: 'HK Grotesk';
   height: 70px;
   font-size: 15px;
-  width: 10px;
+  width: 30px;
 `
 
 export const Td = styled.td`
@@ -65,9 +74,14 @@ export const CommentsParagraph = styled.p`
   border-radius: 40px;
   position: absolute;
   top: 0;
-
   left: 50%;
-
+  font-family: 'HK Grotesk';
+  font-size: 10px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 0.32px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -99,17 +113,18 @@ export const RoleContainer = styled.div`
 `
 export const SearchButton = styled.button`
   background-color: #0b69ff;
-  width: 80px;
+  width: 200px;
   height: 35px;
   border: 0px;
   color: white;
-  font-family: 'Roboto';
+  font-family: 'HK Grotesk';
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.71;
   letter-spacing: normal;
+  color: white;
   border-radius: 5px;
 `
 
@@ -117,7 +132,7 @@ export const TableParagraph = styled.p`
   height: 100px;
   width: 100%;
   overflow-y: auto;
-
+  font-family: 'HK Grotesk';
   padding: 10px;
   margin-top: 20px;
   display: flex;

@@ -8,6 +8,13 @@ export const CardSpan = styled.span`
   border: 5px;
   font-size: 13px;
   font-weight: 500;
+  font-family: 'Rubik';
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
 `
 
 export const j = ``

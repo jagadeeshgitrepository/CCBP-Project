@@ -18,6 +18,9 @@ const SelectTagSingle = props => {
             options={options}
             onChange={singleDropFun}
             placeholder="Status..."
+            style={{
+              color: 'green',
+            }}
           />
         </div>
       </div>

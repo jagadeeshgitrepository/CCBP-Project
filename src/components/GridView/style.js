@@ -37,8 +37,8 @@ export const SpanContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 290px;
-  margin-top: 20px;
+  width: 90%;
+  margin-top: 30px;
   margin-bottom: 20px;
 `
 
@@ -54,7 +54,7 @@ export const ProfileContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
+  width: 90%;
 `
 export const ProfileCommentsContainer = styled.div`
   display: flex;
@@ -80,7 +80,16 @@ export const ProfileImage = styled.img`
 `
 export const ProfileNameParagraph = styled.p`
   color: '#d7dfe9';
-  font-weight: 500;
+  font-weight: normal;
+  font-family: 'HK Grotesk';
+  font-size: 14px;
+
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+
+  margin-top: 20px;
 `
 
 export const ChangeViewButton = styled.button`

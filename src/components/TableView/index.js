@@ -70,37 +70,37 @@ const TableView = props => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Id',
+        Header: 'ID',
         accessor: 'postId', // accessor is the "key" in the data
       },
       {
-        Header: 'Title',
+        Header: 'TITLE',
         accessor: 'title',
       },
       {
-        Header: 'Content',
+        Header: 'CONTENT',
         accessor: 'postContent',
       },
       {
-        Header: 'Post',
+        Header: 'POST',
         accessor: 'userName',
       },
       {
-        Header: 'Status',
+        Header: 'STATUS',
         accessor: 'requestStatus',
       },
       {
-        Header: 'Tags',
+        Header: 'TAGS',
         accessor: 'isReacted',
       },
 
       {
-        Header: 'Date',
+        Header: 'DATE',
         accessor: 'postedAt',
       },
 
       {
-        Header: 'Comments',
+        Header: 'COMMENTS',
         accessor: 'commentsCount',
       },
     ],
@@ -199,8 +199,8 @@ const TableView = props => {
                       {column.render('Header')}
                       {/* Add a sort direction indicator */}
 
-                      {column.render('Header') === 'Date' ||
-                      column.render('Header') === 'Id' ? (
+                      {column.render('Header') === 'DATE' ||
+                      column.render('Header') === 'ID' ? (
                         <span>
                           {column.isSortedDesc ? (
                             <Image
@@ -233,7 +233,7 @@ const TableView = props => {
                   {row.cells.map(cell => (
                     <Td {...cell.getCellProps()}>
                       <TableParagraph>
-                        {cell.render('Header') === 'Post' ? (
+                        {cell.render('Header') === 'POST' ? (
                           <>
                             <Image
                               src={
@@ -246,7 +246,7 @@ const TableView = props => {
                           </>
                         ) : null}
 
-                        {cell.render('Header') === 'Comments' ? (
+                        {cell.render('Header') === 'COMMENTS' ? (
                           <CommentsContainer>
                             <CommentsImage
                               src="https://res.cloudinary.com/dmpepn8dm/image/upload/v1648295260/output-onlinepngtools_1_zufztr.png"
@@ -259,11 +259,11 @@ const TableView = props => {
                           </CommentsContainer>
                         ) : null}
 
-                        {cell.render('Header') === 'Date' ? (
+                        {cell.render('Header') === 'DATE' ? (
                           <p>{cell.value.slice(0, 10)}</p>
                         ) : null}
 
-                        {cell.render('Header') === 'Tags' ? (
+                        {cell.render('Header') === 'TAGS' ? (
                           <RoleContainer>
                             <Span
                               spanContent={
@@ -282,7 +282,7 @@ const TableView = props => {
                           </RoleContainer>
                         ) : null}
 
-                        {cell.render('Header') === 'Status' ? (
+                        {cell.render('Header') === 'STATUS' ? (
                           <>
                             <ApproveButton
                               username={
@@ -308,11 +308,11 @@ const TableView = props => {
                           </>
                         ) : null}
 
-                        {cell.render('Header') !== 'Comments' &&
-                        cell.render('Header') !== 'Status' &&
-                        cell.render('Header') !== 'Date' &&
-                        cell.render('Header') !== 'Tags' &&
-                        cell.render('Header') !== 'Post' ? (
+                        {cell.render('Header') !== 'COMMENTS' &&
+                        cell.render('Header') !== 'STATUS' &&
+                        cell.render('Header') !== 'DATE' &&
+                        cell.render('Header') !== 'TAGS' &&
+                        cell.render('Header') !== 'POST' ? (
                           <p>{cell.render('Cell')}</p>
                         ) : null}
                       </TableParagraph>

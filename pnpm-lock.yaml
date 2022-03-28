@@ -28,6 +28,7 @@ dependencies:
   react-table: 7.7.0_react@16.14.0
   slick-carousel: 1.8.1
   styled-components: 5.3.3_react-dom@16.14.0+react@16.14.0
+  typeface-hk-grotesk: 1.0.0
   uuid: 8.3.2
 devDependencies:
   eslint: 7.32.0
@@ -14060,6 +14061,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+  /typeface-hk-grotesk/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-tKxWUpymfyRETwH1/X/c6dZCL5X6wDsAo0RA878MX5ennOQ+eelorsJwfVxgEinPMu1h0XpMOHWGUxFu+pJaCg==
   /unbox-primitive/1.0.1:
     dependencies:
       function-bind: 1.1.1
@@ -14979,4 +14984,5 @@ specifiers:
   react-table: 7.7.0
   slick-carousel: 1.8.1
   styled-components: 5.3.3
+  typeface-hk-grotesk: 1.0.0
   uuid: 8.3.2
