@@ -113,9 +113,6 @@ const TableView = props => {
   const tableApproveFunction = (username, id) => {
     approveFunction(username, id)
   }
-  console.log('table')
-  console.log(acceptRequestList[0].requestStatus)
-
   let tagsList = acceptRequestList.map(eachItem => {
     const {tags} = eachItem
     const innerTags = tags.map(item => ({
