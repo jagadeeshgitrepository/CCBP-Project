@@ -160,14 +160,11 @@ class DataViews extends Component {
         acceptRequestList: updateApproveList,
         approveLoader: false,
         approveId: '',
-        shouldUpdateTableData: true,
       })
     } else alert('response failed please click again')
   }
 
   render() {
-    const {shouldUpdateTableData} = this.state
-
     return (
       <ApplicationMainContainer>
         <ViewRequestsContainer>

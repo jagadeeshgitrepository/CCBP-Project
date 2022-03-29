@@ -132,7 +132,6 @@ const TableView = props => {
   ]
 
   const multipleDropDownFunction = selectedData => {
-    console.log(selectedData)
     setMultipleSelect(selectedData)
   }
 
