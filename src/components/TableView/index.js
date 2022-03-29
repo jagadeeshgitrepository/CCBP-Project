@@ -37,16 +37,12 @@ const TableView = props => {
   const [offset, setOffset] = useState(0)
   const [paginationData, setPaginationData] = useState(acceptRequestList)
   const [perPage] = useState(3)
-
-  console.log(perPage)
   const [pageCount, setPageCount] = useState(
     Math.ceil(acceptRequestList.length / perPage),
   )
   const [requestData, setRequestData] = useState(
     acceptRequestList.slice(offset, offset + perPage),
   )
-  console.log('hello')
-  console.log(offset)
   const [multipleSelect, setMultipleSelect] = useState('')
   const [singleSelect, setSingleSelect] = useState('Approve')
 
@@ -231,7 +227,7 @@ const TableView = props => {
                 <TableRow {...row.getRowProps()}>
                   {row.cells.map(cell => (
                     <Td {...cell.getCellProps()}>
-                      <TableParagraph>
+                      <TableViewContainer tdData>
                         {cell.render('Header') === 'POST' ? (
                           <>
                             <Image
@@ -259,7 +255,9 @@ const TableView = props => {
                         ) : null}
 
                         {cell.render('Header') === 'DATE' ? (
-                          <p>{cell.value.slice(0, 10)}</p>
+                          <TableParagraph>
+                            {cell.value.slice(0, 10)}
+                          </TableParagraph>
                         ) : null}
 
                         {cell.render('Header') === 'TAGS' ? (
@@ -312,9 +310,9 @@ const TableView = props => {
                         cell.render('Header') !== 'DATE' &&
                         cell.render('Header') !== 'TAGS' &&
                         cell.render('Header') !== 'POST' ? (
-                          <p>{cell.render('Cell')}</p>
+                          <TableParagraph>{cell.render('Cell')}</TableParagraph>
                         ) : null}
-                      </TableParagraph>
+                      </TableViewContainer>
                     </Td>
                   ))}
                 </TableRow>

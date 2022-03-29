@@ -132,7 +132,6 @@ export const SearchButton = styled.button`
 export const TableParagraph = styled.p`
   height: 100px;
   width: 100%;
-  overflow-y: auto;
   font-family: 'HK Grotesk';
   padding: 10px;
   margin-top: 20px;
@@ -143,6 +142,11 @@ export const TableParagraph = styled.p`
   text-overflow: ellipsis;
   text-align: left;
   line-height: 1.33;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const TableRow = styled.tr``
@@ -153,6 +157,7 @@ export const FilterParagraph = styled.p`
 
 export const TableViewContainer = styled.div`
   width: 100%;
+  height: ${props => (props.tdData ? '130px' : null)};
   display: flex;
   flex-direction: column;
   justify-content: center;

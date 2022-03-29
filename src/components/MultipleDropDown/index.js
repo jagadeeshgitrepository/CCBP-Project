@@ -4,7 +4,6 @@ const SelectTagMultiple = props => {
   const {tagsList, dropDownFunction} = props
 
   const multiDropFun = event => {
-    console.log('clicked')
     let selectedData = event.map(eachSelected => eachSelected.value)
     if (selectedData[0] === '')
       selectedData = tagsList.map(eachTag => eachTag.value)

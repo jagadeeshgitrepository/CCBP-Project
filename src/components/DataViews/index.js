@@ -5,23 +5,8 @@ import GridView from '../GridView/index'
 import LoaderComponent from '../Loader/index'
 import Failure from '../Failure/index'
 import TableView from '../TableView/index'
-
-import {
-  ViewRequestsContainer,
-  ApplicationMainContainer,
-  ChangeViewButton,
-} from './style'
-
-const gridViewStatus = {
-  loading: 'LOADING',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-}
-
-const userView = {
-  grid: 'GRID',
-  table: 'TABLE',
-}
+import {gridViewStatus, userView} from '../data'
+import {ViewRequestsContainer, ApplicationMainContainer} from './style'
 
 class DataViews extends Component {
   state = {
@@ -37,7 +22,12 @@ class DataViews extends Component {
   }
 
   getAcceptRequestDetails = async () => {
-    this.setState({pageStatus: gridViewStatus.loading})
+    const {match} = this.props
+
+    this.setState({
+      pageStatus: gridViewStatus.loading,
+      view: match.path.slice(1, 6).toUpperCase(),
+    })
     const apiUrl =
       'https://y5764x56r9.execute-api.ap-south-1.amazonaws.com/mockAPI/posts'
     const options = {
@@ -116,6 +106,8 @@ class DataViews extends Component {
     }
   }
 
+  retryApi = () => this.getAcceptRequestDetails()
+
   success = () => {
     const {acceptRequestList, view, approveLoader, approveId} = this.state
 
@@ -173,21 +165,11 @@ class DataViews extends Component {
     } else alert('response failed please click again')
   }
 
-  changeView = () => {
-    this.setState(prevState => ({
-      view: prevState.view === 'GRID' ? userView.table : userView.grid,
-    }))
-  }
-
   render() {
     const {shouldUpdateTableData} = this.state
-    console.log('abbo')
-    console.log(shouldUpdateTableData)
+
     return (
       <ApplicationMainContainer>
-        <ChangeViewButton type="button" onClick={this.changeView}>
-          Change
-        </ChangeViewButton>
         <ViewRequestsContainer>
           {this.switchPageContent()}
         </ViewRequestsContainer>
